@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Widget API",
+    "description": "A small sample API for demonstrating postman-to-markdown.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Widgets",
+      "description": "Endpoints for managing widgets.",
+      "item": [
+        {
+          "name": "List widgets",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "X-Debug", "value": "1", "disabled": true }
+            ],
+            "url": {
+              "raw": "https://api.example.com/widgets?limit=10",
+              "host": ["api", "example", "com"],
+              "path": ["widgets"],
+              "query": [{ "key": "limit", "value": "10" }]
+            },
+            "description": "Return a page of widgets."
+          },
+          "response": [
+            {
+              "name": "OK",
+              "code": 200,
+              "status": "OK",
+              "body": "{\n  \"widgets\": [{ \"id\": 1, \"name\": \"Sprocket\" }]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create widget",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://api.example.com/widgets",
+              "host": ["api", "example", "com"],
+              "path": ["widgets"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sprocket\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "description": "Create a new widget."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "url": "https://api.example.com/health",
+        "description": "Liveness probe."
+      },
+      "response": []
+    }
+  ]
+}
